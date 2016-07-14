@@ -10,8 +10,8 @@ module.exports = function (grunt) {
             }
         },
         watch: {
-            files: ['<%= jshint.files %>'],
-            tasks: ['jshint']
+            files: ['src/**'],
+            tasks: ['copy']
         },
         cssmin: {
             target: {
@@ -34,8 +34,30 @@ module.exports = function (grunt) {
         copy: {
             main: {
                 files: [
-                    //copy all css into distribution folder
-                    {expand: true, cwd: 'src', src: '**', dest: 'dist/'}
+                    {
+                        expand: true,
+                        cwd: 'src',
+                        src: '*.htm',
+                        dest: 'dist/'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'src',
+                        src: 'img/**',
+                        dest: 'dist/img'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'src',
+                        src: 'css/**',
+                        dest: 'dist/css'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'src',
+                        src: 'views/**',
+                        dest: 'dist/views'
+                    }
                 ]
             }
         }
@@ -47,7 +69,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-copy');
 
-    grunt.registerTask('default', ['jshint', 'uglify']);
+    grunt.registerTask('default', ['jshint', 'uglify','copy']);
 
 
 };
